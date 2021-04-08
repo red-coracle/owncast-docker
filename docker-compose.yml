@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  owncast:
+    image: ghrc.io/red-coracle/owncast:latest
+    ports:
+      - 1935:1935
+    networks:
+      - traefik
+    volumes:
+      - ./data:/app/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.owncast.rule=Host(`owncast.example.com`)
+      - traefik.http.routers.owncast.entryPoints=https
+      - traefik.http.routers.owncast.tls.certresolver=letsencrypt
+      - traefik.http.routers.owncast.middlewares=gzip@docker
+      - traefik.http.services.owncast.loadbalancer.server.port=8080
+
+networks:
+  traefik:
+    external: true
