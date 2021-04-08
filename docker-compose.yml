@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   owncast:
-    image: ghrc.io/red-coracle/owncast:latest
+    image: ghcr.io/red-coracle/owncast:latest
     ports:
       - 1935:1935
     networks:
