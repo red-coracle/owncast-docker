@@ -2,7 +2,7 @@ FROM golang:alpine as builder
 
 RUN set -ex \
     && apk add --no-cache gcc build-base linux-headers git \
-    && git clone --branch master --single-branch https://github.com/owncast/owncast /owncast \
+    && git clone --branch develop --single-branch https://github.com/owncast/owncast /owncast \
     && cd /owncast \
     && CGO_ENABLED=1 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o owncast .
 
