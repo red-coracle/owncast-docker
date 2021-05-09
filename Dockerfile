@@ -8,7 +8,8 @@ RUN set -ex \
 
 FROM alpine:latest
 
-RUN apk add --no-cache ffmpeg ffmpeg-libs ca-certificates && update-ca-certificates
+RUN apk add --no-cache ffmpeg ffmpeg-libs ca-certificates && update-ca-certificates \
+    && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing libva-utils libva-intel-driver
 
 WORKDIR /app
 COPY --from=builder /owncast/owncast /usr/local/bin
