@@ -3,12 +3,14 @@ version: '3.8'
 services:
   owncast:
     image: ghcr.io/red-coracle/owncast:latest
+    privileged: true
     ports:
       - 1935:1935
     networks:
       - traefik
     volumes:
       - ./data:/app/data
+      - /dev/dri:/dev/dri
     labels:
       - traefik.enable=true
       - traefik.http.routers.owncast.rule=Host(`owncast.example.com`)
