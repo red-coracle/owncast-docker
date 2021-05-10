@@ -9,7 +9,7 @@ RUN set -ex \
 FROM alpine:latest
 
 RUN apk add --no-cache ffmpeg ffmpeg-libs ca-certificates && update-ca-certificates \
-    && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing libva-utils libva-intel-driver
+    && if [ $(uname -m) == "x86_64" ]; then apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing libva-utils libva-intel-driver; fi
 
 WORKDIR /app
 COPY --from=builder /owncast/owncast /usr/local/bin
